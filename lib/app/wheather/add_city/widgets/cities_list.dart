@@ -40,7 +40,7 @@ class _CitiesListWidgetState extends State<CitiesListWidget> {
             children: widget.countries
                 .map((e) {
                   var filteredCities = e.cities
-                      .where((city) => city.contains(search.controller!.text));
+                      .where((city) => city.contains(search.controller!.text.capitalize()));
                   if (filteredCities.isEmpty) {
                     return null;
                   } else {
@@ -98,4 +98,10 @@ class CountryWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+extension StringExtension on String {
+    String capitalize() {
+      return "${this[0].toUpperCase()}${substring(1)}";
+    }
 }
