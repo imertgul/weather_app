@@ -89,6 +89,7 @@ class CountryWidget extends StatelessWidget {
                 .map((e) => ListTile(
                       onTap: () {
                         selectedCity(e);
+                        Navigator.pop(context);
                       },
                       trailing: const Icon(Icons.add),
                       title: Text(
