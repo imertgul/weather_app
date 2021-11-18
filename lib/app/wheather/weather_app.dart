@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/app/wheather/add_city/add_city.dart';
-import 'package:weather_app/helpers/weather_helper.dart';
 import 'package:weather_app/repository/weather_repository.dart';
 
 class WeatherApp extends StatelessWidget {
@@ -16,28 +14,26 @@ class WeatherApp extends StatelessWidget {
         title: Text(title),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddCity(
-                        selectedCity: (city) {
-                          WeatherRepository().addCity(city);
-                        },
-                      ),
-                    ));
-              },
-              icon: const Icon(Icons.add)),
+            onPressed: () {
+              Navigator.pushNamed(context, 'add_city');
+            },
+            icon: const Icon(Icons.add),
+          )
         ],
       ),
       body: StreamBuilder<List<String>>(
         stream: WeatherRepository().weathersStream,
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
+          var cities = snapshot.data!;
+            if (cities.isEmpty) {
+              return const Center(child: Text('Please add one'));
+            }
             return ListView(
-              children: snapshot.data!.map((e) => Text(e)).toList(),
+              children: cities.map((e) => Text(e)).toList(),
             );
-          } return const CircularProgressIndicator();
+          }
+          return const CircularProgressIndicator();
         },
       ),
     );

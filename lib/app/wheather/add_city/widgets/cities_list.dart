@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/models/country/country.dart';
+import 'package:weather_app/repository/weather_repository.dart';
 
 class CitiesListWidget extends StatefulWidget {
   const CitiesListWidget({
     Key? key,
     required this.countries,
-    required this.selectedCity,
   }) : super(key: key);
 
   final List<Country> countries;
-  final Function(String city) selectedCity;
 
   @override
   State<CitiesListWidget> createState() => _CitiesListWidgetState();
@@ -51,7 +50,6 @@ class _CitiesListWidgetState extends State<CitiesListWidget> {
                 .where((e) => e != null)
                 .map((e) => CountryWidget(
                       country: e!,
-                      selectedCity: widget.selectedCity,
                     ))
                 .toList(),
           ),
@@ -61,14 +59,11 @@ class _CitiesListWidgetState extends State<CitiesListWidget> {
   }
 }
 
-
 class CountryWidget extends StatelessWidget {
-  final Function(String city) selectedCity;
   final Country country;
   const CountryWidget({
     Key? key,
     required this.country,
-    required this.selectedCity,
   }) : super(key: key);
 
   @override
@@ -88,7 +83,7 @@ class CountryWidget extends StatelessWidget {
             children: country.cities
                 .map((e) => ListTile(
                       onTap: () {
-                        selectedCity(e);
+                        WeatherRepository().addCity(e);
                         Navigator.pop(context);
                       },
                       trailing: const Icon(Icons.add),
