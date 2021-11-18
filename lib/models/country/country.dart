@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'country.g.dart';
@@ -9,13 +8,14 @@ class Country {
   final List<String> cities;
 
   @override
-  String toString(){
+  String toString() {
     return country + '- ' + cities.toString();
   }
 
   Country(this.country, this.cities);
 
-    factory Country.fromJson(Map<String, dynamic> json) => _$CountryFromJson(json);
+  factory Country.fromJson(Map<String, dynamic> json) =>
+      _$CountryFromJson(json);
 
   /// `toJson` is the convention for a class to declare support for serialization
   /// to JSON. The implementation simply calls the private, generated
