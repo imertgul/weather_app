@@ -6,16 +6,11 @@ class AddCity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getCities();
+    CityHelper.fetchCountry();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Cities'),
       ),
     );
-  }
-
-  Future<void> getCities() async {
-    var response = await CityHelper.fetchCities();
-    print(response.body.toString());
   }
 }
