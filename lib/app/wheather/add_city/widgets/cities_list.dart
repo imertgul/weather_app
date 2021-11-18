@@ -1,32 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_app/helper/city_helper.dart';
 import 'package:weather_app/models/country/country.dart';
-
-class AddCity extends StatelessWidget {
-  final Function(String city) selectedCity;
-  const AddCity({Key? key, required this.selectedCity}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Cities'),
-      ),
-      body: FutureBuilder<CountriesResponse>(
-        future: CityHelper.fetchCountry(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return CitiesListWidget(
-                countries: snapshot.data!.countries,
-                selectedCity: selectedCity);
-          }
-          return const Center(child: CircularProgressIndicator());
-        },
-      ),
-    );
-  }
-}
 
 class CitiesListWidget extends StatefulWidget {
   const CitiesListWidget({
@@ -53,7 +26,7 @@ class _CitiesListWidgetState extends State<CitiesListWidget> {
           setState(() {});
         }
       },
-      controller: TextEditingController(text: 'Turkey'),
+      controller: TextEditingController(text: 'Ist'),
     );
     super.initState();
   }
@@ -87,6 +60,7 @@ class _CitiesListWidgetState extends State<CitiesListWidget> {
     );
   }
 }
+
 
 class CountryWidget extends StatelessWidget {
   final Function(String city) selectedCity;

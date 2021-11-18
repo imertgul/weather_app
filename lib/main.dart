@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/app/wheather/weather_app.dart';
 
-import 'app/wheather/add_city.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -10,15 +8,19 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  static const title = 'My Weather App';
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Weather App',
+      title: title,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AddCity(selectedCity: (city){print(city);},),
+      home: const WeatherApp(
+        title: title,
+      ),
     );
   }
 }
-
