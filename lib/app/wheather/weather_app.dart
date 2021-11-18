@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/app/wheather/widget/weather_card.dart';
 import 'package:weather_app/repository/weather_repository.dart';
 
 class WeatherApp extends StatelessWidget {
@@ -7,7 +8,6 @@ class WeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // WeatherHelper.currentWeather('Kadikoy');
     WeatherRepository();
     return Scaffold(
       appBar: AppBar(
@@ -25,12 +25,17 @@ class WeatherApp extends StatelessWidget {
         stream: WeatherRepository().weathersStream,
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
-          var cities = snapshot.data!;
+            var cities = snapshot.data!;
             if (cities.isEmpty) {
               return const Center(child: Text('Please add one'));
             }
             return ListView(
-              children: cities.map((e) => Text(e)).toList(),
+              children: cities
+                  .map((e) => WeatherCard(
+                        key: ValueKey(e),
+                        city: e,
+                      ))
+                  .toList(),
             );
           }
           return const CircularProgressIndicator();
