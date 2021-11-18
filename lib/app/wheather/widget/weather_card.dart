@@ -82,21 +82,13 @@ class _WeatherCardState extends State<WeatherCard> {
                                   ),
                                   Row(
                                     children: [
-                                      Text(weather.description),
-
+                                      Text(weather.description.toTitleCase()),
                                       Expanded(child: Container()),
-                                      // TextButton(
-                                      //   onPressed: () {
-                                      //     WeatherRepository().removeCity(widget.city);
-                                      //   },
-                                      //   child: const Text('Delete'),
-                                      // )
-                                      IconButton(
+                                      TextButton(
                                         onPressed: () {
-                                          WeatherRepository()
-                                              .removeCity(widget.city);
+                                          WeatherRepository().removeCity(widget.city);
                                         },
-                                        icon: const Icon(Icons.delete),
+                                        child: const Text('Delete'),
                                       )
                                     ],
                                   ),
@@ -114,4 +106,9 @@ class _WeatherCardState extends State<WeatherCard> {
       },
     );
   }
+}
+
+extension StringCasingExtension on String {
+  String toCapitalized() => length > 0 ?'${this[0].toUpperCase()}${substring(1)}':'';
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ').split(" ").map((str) => str.toCapitalized()).join(" ");
 }
