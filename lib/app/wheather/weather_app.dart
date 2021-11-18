@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/app/wheather/add_city/add_city.dart';
+import 'package:weather_app/helpers/weather_helper.dart';
 
 class WeatherApp extends StatelessWidget {
   final String title;
@@ -7,6 +8,7 @@ class WeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WeatherHelper.currentWeather('Kadikoy');
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
