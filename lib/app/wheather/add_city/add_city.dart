@@ -4,8 +4,7 @@ import 'package:weather_app/app/wheather/add_city/widgets/cities_list.dart';
 import 'package:weather_app/helpers/city_helper.dart';
 
 class AddCity extends StatelessWidget {
-  final Function(String city) selectedCity;
-  const AddCity({Key? key, required this.selectedCity}) : super(key: key);
+  const AddCity({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +17,7 @@ class AddCity extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return CitiesListWidget(
-                countries: snapshot.data!.countries,
-                selectedCity: selectedCity);
+                countries: snapshot.data!.countries);
           }
           return const Center(child: CircularProgressIndicator());
         },
