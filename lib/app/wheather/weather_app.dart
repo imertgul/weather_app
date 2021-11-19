@@ -25,12 +25,20 @@ class WeatherApp extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
             var cities = snapshot.data!;
+            List<Widget> cardList = [];
             if (cities.isEmpty) {
-              return const Center(child: Text('Please add one'));
+              cardList.add(const WeatherByCoordWrapper());
+            } else {
+              cardList = cities
+                  .map((e) => WeatherCardWrapper(
+                        city: e,
+                        key: Key(e),
+                      ))
+                  .cast<Widget>()
+                  .toList();
+              cardList.insert(0, const WeatherByCoordWrapper());
             }
-            List<Widget> cardList = cities.map((e) => WeatherCardWrapper(city: e, key: Key(e),)).cast<Widget>().toList();
-            cardList.insert(0 , const WeatherByCoordWrapper());
-            
+            //List of weather list builded here
             return ListView(
               children: cardList,
             );
@@ -41,4 +49,3 @@ class WeatherApp extends StatelessWidget {
     );
   }
 }
-

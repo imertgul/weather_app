@@ -9,11 +9,9 @@ void main() {
   runApp(const MyApp());
 }
 
-Map<String, Widget Function(BuildContext)> routes =
-    <String, WidgetBuilder>{
+Map<String, Widget Function(BuildContext)> routes = <String, WidgetBuilder>{
   'add_city': (context) => const AddCity(),
 };
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -26,7 +24,10 @@ class MyApp extends StatelessWidget {
       title: title,
       debugShowCheckedModeBanner: false,
       routes: routes,
-      theme: ThemeData(primarySwatch: Colors.blue, brightness: Brightness.dark),
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+        brightness: Brightness.dark,
+      ),
       home: const WeatherApp(
         title: title,
       ),
