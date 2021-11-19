@@ -8,7 +8,6 @@ class WeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WeatherRepository();
     return Scaffold(
       appBar: AppBar(
         title: Text(title),

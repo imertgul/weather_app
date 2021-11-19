@@ -23,4 +23,13 @@ class LocationHelper {
     }
     return false;
   }
+
+  Future<LocationData> getLocation() async {
+    if (await enableService()) {
+      if (await getPermission()) {
+        return await location.getLocation();
+      }
+    }
+    throw StateError('You should enable and give permission');
+  }
 }
