@@ -10,7 +10,8 @@ class WeatherCard extends StatefulWidget {
   const WeatherCard({
     Key? key,
     required this.weather,
-    this.isLocationBased = false, this.name,
+    this.isLocationBased = false,
+    this.name,
   }) : super(key: key);
 
   @override
@@ -50,6 +51,7 @@ class _WeatherCardState extends State<WeatherCard> {
                           children: [
                             Text(
                               widget.weather.name,
+                              style: const TextStyle(fontSize: 32),
                               textAlign: TextAlign.start,
                             ),
                             widget.isLocationBased
@@ -57,9 +59,12 @@ class _WeatherCardState extends State<WeatherCard> {
                                 : Container(),
                           ],
                         ),
-                        Text(widget.weather.lat.toString() +
-                            ' ' +
-                            widget.weather.lon.toString()),
+                        Text(
+                          widget.weather.lat.toString() +
+                              '   ' +
+                              widget.weather.lon.toString(),
+                          style: const TextStyle(fontSize: 12),
+                        ),
                       ],
                     ),
                     Expanded(child: Container()),
@@ -67,8 +72,11 @@ class _WeatherCardState extends State<WeatherCard> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(widget.weather.temp.toString() + '°'),
-                        Text(widget.weather.title),
+                        Text(
+                          widget.weather.temp.toString() + '°',
+                          style: const TextStyle(fontSize: 24),
+                        ),
+                        Text(widget.weather.title, style: const TextStyle(fontSize: 24),),
                       ],
                     ),
                   ],
@@ -80,18 +88,19 @@ class _WeatherCardState extends State<WeatherCard> {
                     child: !isCardOpen
                         ? Container()
                         : Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(widget.weather.description.toTitleCase()),
+                                  Text(
+                                      widget.weather.description.toTitleCase()),
                                   Row(
                                     children: [
-                                      const Icon(
-                                          CommunityMaterialIcons.arrow_down_bold),
+                                      const Icon(CommunityMaterialIcons
+                                          .arrow_down_bold),
                                       Text(widget.weather.tempMin.toString() +
                                           '°'),
                                       const Icon(
@@ -103,7 +112,7 @@ class _WeatherCardState extends State<WeatherCard> {
                                       Text(widget.weather.windSpeed.toString() +
                                           ' km/s'),
                                     ],
-                                  ),                                  
+                                  ),
                                 ],
                               ),
                               widget.isLocationBased
