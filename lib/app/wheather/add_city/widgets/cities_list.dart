@@ -78,8 +78,7 @@ class CountryWidget extends StatelessWidget {
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           const Divider(),
-          ListView(
-            shrinkWrap: true,
+          Column(
             children: country.cities
                 .map((e) => ListTile(
                       onTap: () {

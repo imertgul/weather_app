@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WeatherRepository {
@@ -9,6 +10,12 @@ class WeatherRepository {
 
   WeatherRepository._() {
     initStream();
+  }
+
+  Future<SharedPreferences> get _prefs async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    return await SharedPreferences.getInstance();
   }
 
   Future<void> initStream() async {
@@ -23,13 +30,14 @@ class WeatherRepository {
 
   Future<void> addCity(String city) async {
     var pref = await _prefs;
-    var cities = pref.getStringList(_cityKey); 
+    var cities = pref.getStringList(_cityKey);
     if (cities != null) {
       cities.add(city);
       await pref.setStringList(_cityKey, cities);
       _savedWeathers.add(cities);
     } else {
       await pref.setStringList(_cityKey, <String>[city]);
+      _savedWeathers.add(<String>[city]);
     }
   }
 
@@ -40,11 +48,11 @@ class WeatherRepository {
       cities.remove(city);
       await pref.setStringList(_cityKey, cities);
       _savedWeathers.add(cities);
+    } else {
+      _savedWeathers.add([]);
     }
   }
 
   Stream<List<String>> get weathersStream => _savedWeathers.stream;
-
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   final _savedWeathers = StreamController<List<String>>();
 }

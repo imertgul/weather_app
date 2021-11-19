@@ -39,6 +39,7 @@ dependencies:
   json_annotation: ^4.3.0
   shared_preferences: ^2.0.8
   community_material_icon: ^5.9.55
+  location: ^4.3.0
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,9 @@ part 'weather.g.dart';
 
 @JsonSerializable()
 class Weather {
+  final String name;
+  final double lat;
+  final double lon;
   final String title;
   final String description;
   final double temp;
@@ -17,7 +20,7 @@ class Weather {
   final double windSpeed;
 
   Weather(this.title, this.description, this.temp, this.feelsLike, this.tempMin,
-      this.tempMax, this.windSpeed);
+      this.tempMax, this.windSpeed, this.name, this.lat, this.lon);
 
   factory Weather.fromJson(Map<String, dynamic> json) =>
       _$WeatherFromJson(json);
