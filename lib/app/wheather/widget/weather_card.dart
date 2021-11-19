@@ -76,7 +76,10 @@ class _WeatherCardState extends State<WeatherCard> {
                           widget.weather.temp.toString() + '°',
                           style: const TextStyle(fontSize: 24),
                         ),
-                        Text(widget.weather.title, style: const TextStyle(fontSize: 24),),
+                        Text(
+                          widget.weather.title,
+                          style: const TextStyle(fontSize: 24),
+                        ),
                       ],
                     ),
                   ],
