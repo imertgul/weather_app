@@ -20,14 +20,17 @@ class _CitiesListWidgetState extends State<CitiesListWidget> {
   @override
   void initState() {
     search = TextField(
-      onChanged: (text) {
-        if (text.length > 2) {
-          setState(() {});
-          //refreshing the state of list
-        }
-      },
-      controller: TextEditingController(text: 'Ist'),
-    );
+        onChanged: (text) {
+          if (text.length > 2) {
+            setState(() {});
+            //refreshing the state of list
+          }
+        },
+        controller: TextEditingController(text: 'Ist'),
+        decoration: const InputDecoration(
+          hintText: 'Search',
+          border: InputBorder.none,
+        ));
     super.initState();
   }
 
@@ -37,14 +40,34 @@ class _CitiesListWidgetState extends State<CitiesListWidget> {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Column(
         children: [
-          search,
+          const SizedBox(height: 8),
+          Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              borderRadius: BorderRadius.circular(48),
+            ),
+            height: 48,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Row(
+                children: [
+                  const Icon(Icons.search),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: search,
+                  )
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 8),
           Expanded(
             child: ListView(
               children: widget.countries
                   .map((e) {
                     //filter by search
-                    var filteredCities = e.cities
-                        .where((city) => city.contains(search.controller!.text.capitalize()));
+                    var filteredCities = e.cities.where((city) =>
+                        city.contains(search.controller!.text.capitalize()));
                     if (filteredCities.isEmpty) {
                       return null;
                     } else {
@@ -105,7 +128,7 @@ class CountryWidget extends StatelessWidget {
 }
 
 extension StringExtension on String {
-    String capitalize() {
-      return "${this[0].toUpperCase()}${substring(1)}";
-    }
+  String capitalize() {
+    return "${this[0].toUpperCase()}${substring(1)}";
+  }
 }

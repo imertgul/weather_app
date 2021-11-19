@@ -31,13 +31,9 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Gilroy',
         iconTheme: const IconThemeData(color: Colors.orange),
         cardColor: Colors.white10,
-        hoverColor: Colors.black12,
+        hoverColor: Colors.white10,
         brightness: Brightness.dark
         ),
-      // theme: ThemeData(
-      //   primarySwatch: Colors.orange,
-      //   brightness: Brightness.dark,
-      // ),
       home: const WeatherApp(
         title: title,
       ),
