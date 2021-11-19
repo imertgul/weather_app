@@ -1,5 +1,6 @@
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app/app/wheather/widget/error_widgets.dart';
 import 'package:weather_app/helpers/location_helper.dart';
 import 'package:weather_app/helpers/weather_helper.dart';
 import 'package:weather_app/models/weather/weather.dart';
@@ -21,9 +22,13 @@ class WeatherCardWrapper extends StatelessWidget {
       builder: (context, snap) {
         if (snap.hasData && snap.data != null) {
           return WeatherCard(
-            key: ValueKey(city),
+            //uniq key
+            key: ValueKey(snap.data!.name + DateTime.now().toString()),
+            name: city,
             weather: snap.data!,
           );
+        }else if (snap.hasError) {
+          return ErrorCityWidget(city: city, errorText: snap.error.toString());
         }
         return const Center(child: CircularProgressIndicator());
       },
@@ -42,13 +47,14 @@ class WeatherByCoordWrapper extends StatelessWidget {
       builder: (context, snap) {
         if (snap.hasData && snap.data != null) {
           return WeatherCard(
-            key: ValueKey(snap.data!.name),
+            //uniq key
+            key: ValueKey(snap.data!.name + DateTime.now().toString()),
             weather: snap.data!,
             isLocationBased: true,
           );
         }
         if (snap.hasError) {
-          return Text(snap.error.toString());
+          return ErrorTextWidget(errorText: snap.error.toString());
         }
         return const Center(child: CircularProgressIndicator());
       },

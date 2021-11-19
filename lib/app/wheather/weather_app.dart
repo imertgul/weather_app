@@ -32,7 +32,7 @@ class WeatherApp extends StatelessWidget {
               cardList = cities
                   .map((e) => WeatherCardWrapper(
                         city: e,
-                        key: Key(e),
+                        key: ValueKey('wrapper' + e + DateTime.now().toString()),
                       ))
                   .cast<Widget>()
                   .toList();

@@ -23,6 +23,7 @@ class _CitiesListWidgetState extends State<CitiesListWidget> {
       onChanged: (text) {
         if (text.length > 2) {
           setState(() {});
+          //refreshing the state of list
         }
       },
       controller: TextEditingController(text: 'Ist'),
@@ -32,29 +33,33 @@ class _CitiesListWidgetState extends State<CitiesListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        search,
-        Expanded(
-          child: ListView(
-            children: widget.countries
-                .map((e) {
-                  var filteredCities = e.cities
-                      .where((city) => city.contains(search.controller!.text.capitalize()));
-                  if (filteredCities.isEmpty) {
-                    return null;
-                  } else {
-                    return Country(e.country, filteredCities.toList());
-                  }
-                })
-                .where((e) => e != null)
-                .map((e) => CountryWidget(
-                      country: e!,
-                    ))
-                .toList(),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      child: Column(
+        children: [
+          search,
+          Expanded(
+            child: ListView(
+              children: widget.countries
+                  .map((e) {
+                    //filter by search
+                    var filteredCities = e.cities
+                        .where((city) => city.contains(search.controller!.text.capitalize()));
+                    if (filteredCities.isEmpty) {
+                      return null;
+                    } else {
+                      return Country(e.country, filteredCities.toList());
+                    }
+                  })
+                  .where((e) => e != null)
+                  .map((e) => CountryWidget(
+                        country: e!,
+                      ))
+                  .toList(),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
