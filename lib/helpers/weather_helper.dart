@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:weather_app/helpers/location_helper.dart';
 import 'package:weather_app/models/weather/weather.dart';
 
 class WeatherHelper {
@@ -17,6 +18,17 @@ class WeatherHelper {
   static Future<Weather> currentWeatherByCoord(String lat, String lon) async {
     var response = await http.get(Uri.parse(
         'api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=b852e82532b0212520f11ba94eb9ca2f'));
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = jsonDecode(response.body);
+      return Weather.fromJson(data);
+    }
+    throw StateError('Error while requesting current weather');
+  }
+  static Future<Weather> currentWeatherByMyCoord() async {
+    var locationData = await LocationHelper().getLocation();
+    print(locationData);
+    var response = await http.get(Uri.parse(
+        'api.openweathermap.org/data/2.5/weather?lat=${locationData.latitude}&lon=${locationData.longitude}&appid=b852e82532b0212520f11ba94eb9ca2f'));
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
       return Weather.fromJson(data);

@@ -10,7 +10,7 @@ class LocationHelper {
     if (!serviceEnabled) {
       return await location.requestService();
     }
-    return true;
+    return false;
   }
 
   Future<bool> getPermission() async {
@@ -25,11 +25,12 @@ class LocationHelper {
   }
 
   Future<LocationData> getLocation() async {
-    if (await enableService()) {
-      if (await getPermission()) {
+    var service = await enableService();
+    var permission = await getPermission();
+      if (service && permission) {
         return await location.getLocation();
       }
-    }
-    throw StateError('You should enable and give permission');
+    
+    throw StateError('You should enable and give permission to location');
   }
 }

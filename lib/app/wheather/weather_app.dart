@@ -28,8 +28,10 @@ class WeatherApp extends StatelessWidget {
             if (cities.isEmpty) {
               return const Center(child: Text('Please add one'));
             }
+            List<Widget> cardList = cities.map((e) => WeatherCardWrapper(city: e, key: Key(e),)).cast<Widget>().toList();
+            cardList.add(const WeatherByCoordWrapper());
             return ListView(
-              children: cities.map((e) => WeatherCardWrapper(city: e)).toList(),
+              children: cardList,
             );
           }
           return const CircularProgressIndicator();
