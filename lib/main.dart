@@ -16,7 +16,7 @@ Map<String, Widget Function(BuildContext)> routes = <String, WidgetBuilder>{
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  static const title = 'My Weather App';
+  static const title = 'Weather App';
 
   @override
   Widget build(BuildContext context) {
