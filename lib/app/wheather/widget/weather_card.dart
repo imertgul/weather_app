@@ -38,15 +38,15 @@ class _WeatherCardState extends State<WeatherCard> {
           child: Stack(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(widget.weather.name),
+                          Text(widget.weather.name, textAlign: TextAlign.start,),
                           widget.isLocationBased
                               ? const Icon(Icons.location_on_sharp)
                               : Container(),
@@ -57,6 +57,7 @@ class _WeatherCardState extends State<WeatherCard> {
                           widget.weather.lon.toString()),
                     ],
                   ),
+                  Expanded(child: Container()),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -93,13 +94,15 @@ class _WeatherCardState extends State<WeatherCard> {
                               children: [
                                 Text(widget.weather.description.toTitleCase()),
                                 Expanded(child: Container()),
-                                TextButton(
-                                  onPressed: () {
-                                    WeatherRepository()
-                                        .removeCity(widget.weather.name);
-                                  },
-                                  child: const Text('Delete'),
-                                )
+                                widget.isLocationBased
+                                    ? Container()
+                                    : TextButton(
+                                        onPressed: () {
+                                          WeatherRepository()
+                                              .removeCity(widget.weather.name);
+                                        },
+                                        child: const Text('Delete'),
+                                      )
                               ],
                             ),
                           ],

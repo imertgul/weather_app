@@ -29,7 +29,8 @@ class WeatherApp extends StatelessWidget {
               return const Center(child: Text('Please add one'));
             }
             List<Widget> cardList = cities.map((e) => WeatherCardWrapper(city: e, key: Key(e),)).cast<Widget>().toList();
-            cardList.add(const WeatherByCoordWrapper());
+            cardList.insert(0 , const WeatherByCoordWrapper());
+            
             return ListView(
               children: cardList,
             );
