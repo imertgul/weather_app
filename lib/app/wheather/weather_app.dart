@@ -29,12 +29,7 @@ class WeatherApp extends StatelessWidget {
               return const Center(child: Text('Please add one'));
             }
             return ListView(
-              children: cities
-                  .map((e) => WeatherCard(
-                        key: ValueKey(e),
-                        city: e,
-                      ))
-                  .toList(),
+              children: cities.map((e) => WeatherCardWrapper(city: e)).toList(),
             );
           }
           return const CircularProgressIndicator();
@@ -43,3 +38,4 @@ class WeatherApp extends StatelessWidget {
     );
   }
 }
+
