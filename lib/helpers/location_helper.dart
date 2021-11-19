@@ -3,34 +3,28 @@ import 'package:location/location.dart';
 class LocationHelper {
   LocationHelper();
 
-  final Location location = Location();
+  static Future<LocationData> getLocation() async {
+    Location location = Location();
 
-  Future<bool> enableService() async {
-    var serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      return await location.requestService();
-    }
-    return false;
-  }
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
 
-  Future<bool> getPermission() async {
-    var permissionGranted = await location.hasPermission();
-    if (permissionGranted == PermissionStatus.denied) {
-      permissionGranted = await location.requestPermission();
-      if (permissionGranted == PermissionStatus.granted) {
-        return true;
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        StateError('Please enable location service');
       }
     }
-    return false;
-  }
 
-  Future<LocationData> getLocation() async {
-    var service = await enableService();
-    var permission = await getPermission();
-      if (service && permission) {
-        return await location.getLocation();
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        StateError('Permission denied for location service');
       }
-    
-    throw StateError('You should enable and give permission to location');
+    }
+
+    return await location.getLocation();
   }
 }

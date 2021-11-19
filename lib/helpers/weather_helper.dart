@@ -25,10 +25,9 @@ class WeatherHelper {
     throw StateError('Error while requesting current weather');
   }
   static Future<Weather> currentWeatherByMyCoord() async {
-    var locationData = await LocationHelper().getLocation();
-    print(locationData);
+    var locationData = await LocationHelper.getLocation();
     var response = await http.get(Uri.parse(
-        'api.openweathermap.org/data/2.5/weather?lat=${locationData.latitude}&lon=${locationData.longitude}&appid=b852e82532b0212520f11ba94eb9ca2f'));
+        'https://api.openweathermap.org/data/2.5/weather?lat=${locationData.latitude}&units=metric&lon=${locationData.longitude}&appid=b852e82532b0212520f11ba94eb9ca2f'));
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
       return Weather.fromJson(data);
