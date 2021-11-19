@@ -10,6 +10,17 @@ class WeatherHelper {
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
       return Weather.fromJson(data);
-    } throw StateError('Error while requesting current weather');
+    }
+    throw StateError('Error while requesting current weather');
+  }
+
+  static Future<Weather> currentWeatherByCoord(String lat, String lon) async {
+    var response = await http.get(Uri.parse(
+        'api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=b852e82532b0212520f11ba94eb9ca2f'));
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = jsonDecode(response.body);
+      return Weather.fromJson(data);
+    }
+    throw StateError('Error while requesting current weather');
   }
 }

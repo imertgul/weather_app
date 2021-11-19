@@ -67,7 +67,7 @@ class _WeatherCardState extends State<WeatherCard> {
                   Column(
                     children: [
                       Text(widget.weather.name),
-                      const Text('lat long'),
+                      Text(widget.weather.lat.toString() + ' ' + widget.weather.lon.toString()),
                     ],
                   ),
                   Column(
