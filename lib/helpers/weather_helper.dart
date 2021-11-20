@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/helpers/location_helper.dart';
 import 'package:weather_app/models/weather/weather.dart';
-import 'package:weather_app/repository/weather_repository.dart';
 
 const apiKey = 'b852e82532b0212520f11ba94eb9ca2f';
 
