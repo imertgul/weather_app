@@ -40,9 +40,9 @@ dependencies:
   shared_preferences: ^2.0.8
   community_material_icon: ^5.9.55
   location: ^4.3.0
-  amplify_flutter: 
-  amplify_auth_cognito: 
-  amplify_analytics_pinpoint: 
+  amplify_flutter: ^0.2.9
+  amplify_auth_cognito: ^0.2.9
+  amplify_analytics_pinpoint: ^0.2.9
 
 dev_dependencies:
   flutter_test:
