@@ -33,7 +33,7 @@ class LoginPage extends StatelessWidget {
         if (value == null) {
           return 'Password can not be null';
         }
-        if (value.length > 3 ) {
+        if (value.length < 3 ) {
           return 'Password length should be greater that 3';
         }
         return null;
