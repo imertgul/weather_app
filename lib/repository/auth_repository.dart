@@ -25,10 +25,6 @@ class AuthRepository {
 
   Stream<AuthState> get authState => _authStateController.stream;
 
-  static const Map<String, String> _userAttributes = {
-    'email': 'email@domain.com',
-    'phone_number': '+15559101234',
-  };
 
   Future<void> configureAmplify() async {
     // Add Pinpoint and Cognito Plugins, or any other plugins you want to use
@@ -37,8 +33,8 @@ class AuthRepository {
     await Amplify.addPlugins([authPlugin]);
 
     try {
-    // Once Plugins are added, configure Amplify
-    // Note: Amplify can only be configured once.
+      // Once Plugins are added, configure Amplify
+      // Note: Amplify can only be configured once.
       await Amplify.configure(amplifyconfig);
     } on AmplifyAlreadyConfiguredException {
       StateError(
@@ -46,40 +42,33 @@ class AuthRepository {
     }
   }
 
-  Future<bool> register(String username, String password) async {
-    try {
-      SignUpResult res = await Amplify.Auth.signUp(
-          username: username,
-          password: password,
-          options: const CognitoSignUpOptions(userAttributes: _userAttributes));
-      return res.isSignUpComplete;
-    } on AuthException catch (e) {
-      StateError(e.message);
-    }
-    return false;
+  Future<bool> register({required String email ,required String password}) async {
+     Map<String, String> _userAttributes = {
+    'email': email,
+  };
+    SignUpResult res = await Amplify.Auth.signUp(
+        username: email,
+        password: password,
+        options: CognitoSignUpOptions(userAttributes: _userAttributes));
+    return res.isSignUpComplete;
   }
 
   Future<bool> confirmRegister(String email, String code) async {
-    try {
-      SignUpResult res = await Amplify.Auth.confirmSignUp(
-        username: email,
-        confirmationCode: code,
-      );
-      return res.isSignUpComplete;
-    } on AuthException catch (e) {
-      StateError(e.message);
-    }
-    return false;
+    SignUpResult res = await Amplify.Auth.confirmSignUp(
+      username: email,
+      confirmationCode: code,
+    );
+    return res.isSignUpComplete;
   }
 
   Future<bool> signIn(String email, String password) async {
-      SignInResult res = await Amplify.Auth.signIn(
-        username: email,
-        password: password,
-      );
-      if (res.isSignedIn) {
-        _authStateController.add(AuthSuccess());
-      }
-      return res.isSignedIn;
+    SignInResult res = await Amplify.Auth.signIn(
+      username: email,
+      password: password,
+    );
+    if (res.isSignedIn) {
+      _authStateController.add(AuthSuccess());
+    }
+    return res.isSignedIn;
   }
 }
