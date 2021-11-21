@@ -1,5 +1,7 @@
+import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/app/wheather/widget/wrapper.dart';
+import 'package:weather_app/repository/auth_repository.dart';
 import 'package:weather_app/repository/weather_repository.dart';
 
 class WeatherApp extends StatelessWidget {
@@ -12,6 +14,12 @@ class WeatherApp extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
         actions: [
+          IconButton(
+            onPressed: () {
+              AuthRepository().signOut();
+            },
+            icon: const Icon(CommunityMaterialIcons.logout),
+          ),
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, 'add_city');
