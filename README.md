@@ -19,6 +19,12 @@ JSON serialization with genereted code [Docs](https://docs.flutter.dev/developme
 
 You can test the app on [live demo](https://weatherapp-c1b34.web.app/) without auth version.
 
+<img src="https://raw.githubusercontent.com/imertgul/weather_app/master/screenshots/Screenshot_1637516720.png" width = 150>
+<img src="https://raw.githubusercontent.com/imertgul/weather_app/master/screenshots/Screenshot_1637516736.png" width = 150>
+<img src="https://raw.githubusercontent.com/imertgul/weather_app/master/screenshots/Screenshot_1637516742.png" width = 150>
+<img src="https://raw.githubusercontent.com/imertgul/weather_app/master/screenshots/Screenshot_1637516747.png" width = 150>
+
+
 ## Start Projects
 You have to set and configure [Amplify CLI](https://docs.amplify.aws/lib/auth/getting-started/q/platform/flutter/) to run application.
 
