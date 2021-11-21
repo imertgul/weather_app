@@ -10,13 +10,11 @@ class WeatherRepository {
   //key of shared pref
   static const _cityKey = 'cities';
   //Stream for weatherList state
-  final _savedWeathers = StreamController<List<String>>();
+  final _savedWeathers = StreamController<List<String>>.broadcast();
 
-  WeatherRepository._() {
-    initStream();
-  }
+  WeatherRepository._();
 
-  Stream<List<String>> get weathersStream => _savedWeathers.stream;
+  Stream<List<String>> get weathersStream => _savedWeathers.stream.asBroadcastStream();
 
   Future<SharedPreferences> get _prefs async {
     WidgetsFlutterBinding.ensureInitialized();

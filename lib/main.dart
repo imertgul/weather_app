@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
                     if (authState is AuthRequired) {
                       return const LoginPage();
                     } else if (authState is AuthSuccess) {
-                      WeatherRepository(); //init weather repo
+                      WeatherRepository().initStream();
                       return const WeatherApp(
                         title: title,
                       );

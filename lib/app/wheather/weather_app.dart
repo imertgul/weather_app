@@ -53,7 +53,7 @@ class WeatherApp extends StatelessWidget {
               children: cardList,
             );
           }
-          return const CircularProgressIndicator();
+          return const Center(child:  CircularProgressIndicator());
         },
       ),
     );
