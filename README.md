@@ -18,7 +18,8 @@ JSON serialization with genereted code [Docs](https://docs.flutter.dev/developme
  - Cognito Auth. 
  - Click on weather card to see more information with basic animation.
 
-You can test the app on [live demo](https://weatherapp-c1b34.web.app/) without auth version or download apk from releases(with auth).
+You can test the app on [live demo](https://weatherapp-c1b34.web.app/) without authentication or download apk from releases.
+
 <p float="left">
   <img src="https://raw.githubusercontent.com/imertgul/weather_app/master/screenshots/Screenshot_1637516720.png" width = 150>
   <img src="https://raw.githubusercontent.com/imertgul/weather_app/master/screenshots/Screenshot_1637516736.png" width = 150>
