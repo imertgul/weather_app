@@ -4,17 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WeatherRepository {
+  //To make it singleton
   static final _instance = WeatherRepository._();
   factory WeatherRepository() => _instance;
+  //key of shared pref
   static const _cityKey = 'cities';
+  //Stream for weatherList state
+  final _savedWeathers = StreamController<List<String>>.broadcast();
 
-  WeatherRepository._() {
-    initStream();
-  }
+  WeatherRepository._();
+
+  Stream<List<String>> get weathersStream => _savedWeathers.stream.asBroadcastStream();
 
   Future<SharedPreferences> get _prefs async {
     WidgetsFlutterBinding.ensureInitialized();
-
     return await SharedPreferences.getInstance();
   }
 
@@ -52,7 +55,4 @@ class WeatherRepository {
       _savedWeathers.add([]);
     }
   }
-
-  Stream<List<String>> get weathersStream => _savedWeathers.stream;
-  final _savedWeathers = StreamController<List<String>>();
 }
