@@ -1,6 +1,7 @@
 # weather_app
 
-It is a demo weather app.
+It is a weather app.
+
 | Service      | Source |
 | ----------- | ----------- |
 | Countries & Cities| countriesnow.space|
