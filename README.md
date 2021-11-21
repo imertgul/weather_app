@@ -46,4 +46,4 @@ flutter run -d web-server --web-port 8000
  ## Known bugs
 - Error messages on flutter web is broken by minifier
 - Location service fails on safari browser. 
-- You can find and city on the earth from cities api.  
+- You can't find and city on the earth from cities api.  
