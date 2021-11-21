@@ -24,19 +24,6 @@ class RegisterPage extends StatelessWidget {
         return null;
       },
     );
-    TextFormField username = TextFormField(
-      controller: TextEditingController(),
-      keyboardType: TextInputType.text,
-      decoration: const InputDecoration(
-        hintText: 'Username',
-      ),
-      validator: (String? value) {
-        if (value != null && value.length < 3) {
-          return 'Please enter a valid username.';
-        }
-        return null;
-      },
-    );
     TextFormField password1 = TextFormField(
       controller: TextEditingController(),
       obscureText: true,
@@ -57,7 +44,7 @@ class RegisterPage extends StatelessWidget {
       controller: TextEditingController(),
       obscureText: true,
       decoration: const InputDecoration(
-        hintText: 'Password',
+        hintText: 'Password again',
       ),
       validator: (String? value) {
         if (password1.controller!.text != value) {
@@ -74,6 +61,7 @@ class RegisterPage extends StatelessWidget {
     );
 
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -84,11 +72,10 @@ class RegisterPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
-                  'Login',
+                  'Register',
                   style: TextStyle(fontSize: 32),
                 ),
                 email,
-                username,
                 password1,
                 password2,
                 const SizedBox(height: 16),

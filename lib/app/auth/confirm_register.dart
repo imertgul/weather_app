@@ -15,7 +15,7 @@ class ConfirmRegisterPage extends StatelessWidget {
       controller: TextEditingController(),
       keyboardType: TextInputType.text,
       decoration: const InputDecoration(
-        hintText: 'Email',
+        hintText: 'Confirmation Code',
       ),
       validator: (String? value) {
         if (value == null) {
@@ -26,6 +26,7 @@ class ConfirmRegisterPage extends StatelessWidget {
     );
 
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -37,7 +38,7 @@ class ConfirmRegisterPage extends StatelessWidget {
               children: [
                 Text(
                   'Confirm your account for: $username',
-                  style: const TextStyle(fontSize: 32),
+                  style: const TextStyle(fontSize: 24),
                 ),
                 confirmationCode,
                 const SizedBox(height: 16),
