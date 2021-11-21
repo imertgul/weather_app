@@ -4,7 +4,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:weather_app/amplifyconfiguration.dart';
 
-abstract class AuthState {}
+abstract class AuthState {} //Auth states
 
 class AuthRequired extends AuthState {}
 
@@ -15,6 +15,7 @@ class AuthRepository {
   static final _instance = AuthRepository._();
   factory AuthRepository() => _instance;
 
+  //Auth state stream
   final StreamController<AuthState> _authStateController = StreamController();
 
   AuthRepository._() {
@@ -24,13 +25,10 @@ class AuthRepository {
   Stream<AuthState> get authState => _authStateController.stream;
 
   Future<void> configureAmplify() async {
-    // Add Pinpoint and Cognito Plugins, or any other plugins you want to use
     AmplifyAuthCognito authPlugin = AmplifyAuthCognito();
     await Amplify.addPlugins([authPlugin]);
 
     try {
-      // Once Plugins are added, configure Amplify
-      // Note: Amplify can only be configured once.
       await Amplify.configure(amplifyconfig);
       Amplify.Auth.fetchAuthSession().then((session) {
         if (session.isSignedIn) {
@@ -54,7 +52,8 @@ class AuthRepository {
               _authStateController.add(AuthRequired());
             }
             break;
-          default: _authStateController.add(AuthRequired());
+          default:
+            _authStateController.add(AuthRequired());
         }
       });
     } on AmplifyAlreadyConfiguredException {
@@ -88,9 +87,6 @@ class AuthRepository {
       username: email,
       password: password,
     );
-    // if (res.isSignedIn) {
-    //   _authStateController.add(AuthSuccess());
-    // }
     return res.isSignedIn;
   }
 
