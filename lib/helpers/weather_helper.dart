@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/helpers/location_helper.dart';
 import 'package:weather_app/models/weather/weather.dart';
+import 'package:weather_app/open_weather_api.dart';
 
-const apiKey = 'b852e82532b0212520f11ba94eb9ca2f';
+//const apiKey = 'b852e82532b0212520f11ba94eb9ca2f';
+// add your api key
 
 class WeatherHelper {
   static Future<Weather> currentWeather(String city) async {
